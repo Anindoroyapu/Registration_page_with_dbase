@@ -1,0 +1,63 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Data.SqlClient;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Xml.Linq;
+
+namespace login_page
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+        
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Submit_Click(object sender, EventArgs e)
+        {
+            SqlConnection conn = new SqlConnection(@"Data Source=DESKTOP-R6FGGGQ\SQLEXPRESS;Initial Catalog=login;Integrated Security=True");
+
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("insert into login_new values(@txt_name, @txt_gmail, @txt_gender,@txt_pass,@txt_confirm_pass)",conn);
+
+            
+
+            cmd.Parameters.AddWithValue("@txt_name", (txt_name.Text));
+            cmd.Parameters.AddWithValue("@txt_gmail", (txt_gmail.Text));
+            cmd.Parameters.AddWithValue("@txt_gender", (txt_gender.Text));
+            cmd.Parameters.AddWithValue("@txt_pass", (txt_pass.Text));
+            cmd.Parameters.AddWithValue("@txt_confirm_pass", (txt_confirm_pass.Text));
+
+            cmd.ExecuteNonQuery();
+            conn.Close();         
+            
+            
+            
+            MessageBox.Show("                  Register Successfully....                 ");
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            
+        }
+    }
+}
